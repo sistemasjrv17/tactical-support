@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Páginas legales fuera del índice principal
+Disallow: /aviso-privacidad.html
+Disallow: /aviso-confidencialidad.html
+
+Sitemap: https://tacticalsupport.com.mx/sitemap.xml
