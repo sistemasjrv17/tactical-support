@@ -1,8 +1,8 @@
 /*
   Raíz: gif-tactical.gif, logo.png, somos.png, tactical-edificio.jpg, servicios.jpg, space2.webp (SkyProtector)
   Imágenes en /images/: bg-servicios.jpg, bg-drone.jpg, bg-skymanager.jpg,
-  bg-clientes.jpg, bg-ubicaciones.jpg, bg-filosofia.jpg, bg-compromiso.jpg,
-  bg-bolsa.jpg, bg-contacto.jpg, nosotros.jpg, clientes/logos...
+  bg-ubicaciones.jpg, bg-filosofia.jpg, bg-compromiso.jpg,
+  bg-bolsa.jpg, bg-contacto.jpg, nosotros.jpg
 */
 /* Tactical Support — paleta: blanco, negro, azul oscuro + fondos tipo sitio .mx */
 :root {
@@ -50,6 +50,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* Evita que el header tape secciones al navegar con anclas */
@@ -61,6 +63,16 @@ html {
   scroll-margin-top: 84px;
 }
 
+@media (max-width: 900px) {
+  #nosotros,
+  #servicios,
+  #ubicaciones,
+  #contacto,
+  #formulario-contacto {
+    scroll-margin-top: calc(68px + env(safe-area-inset-top, 0px));
+  }
+}
+
 body {
   margin: 0;
   font-family: var(--font);
@@ -68,6 +80,7 @@ body {
   line-height: 1.65;
   color: #e2e8f0;
   background: var(--surface-0);
+  overflow-x: hidden;
 }
 
 img {
@@ -86,13 +99,15 @@ a:hover {
 }
 
 .container {
-  width: min(1120px, 92vw);
+  width: 100%;
+  max-width: 1120px;
   margin-inline: auto;
+  padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
+  box-sizing: border-box;
 }
 
 /* Render diferido para secciones largas (mejor scroll/rendimiento percibido) */
 .services-ts,
-.section-clientes,
 .section-ubicaciones--bg,
 .ts-filosofia,
 .footer-cta,
@@ -111,6 +126,7 @@ a:hover {
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  padding-top: env(safe-area-inset-top, 0px);
 }
 
 .header-inner {
@@ -119,6 +135,7 @@ a:hover {
   justify-content: space-between;
   padding: 0.85rem 0;
   gap: 1.5rem;
+  min-width: 0;
 }
 
 .logo {
@@ -132,6 +149,8 @@ a:hover {
   text-transform: uppercase;
   color: var(--white);
   text-decoration: none;
+  min-width: 0;
+  flex-shrink: 1;
 }
 
 .logo-img {
@@ -222,6 +241,12 @@ a:hover {
   font-size: 1.25rem;
   line-height: 1;
   color: var(--white);
+  flex-shrink: 0;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
 }
 
 /* Hero — GIF en raíz (gif-tactical.gif) */
@@ -238,6 +263,7 @@ a:hover {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
+  overflow-x: hidden;
 }
 
 .hero::before {
@@ -1132,6 +1158,14 @@ a:hover {
     min-height: 0;
   }
 
+  .ts-drone-showcase__media {
+    min-height: 0;
+  }
+
+  .ts-drone-showcase__media img {
+    min-height: min(48vh, 360px);
+  }
+
   .ts-drone-showcase__panel {
     margin-left: 0;
     padding-left: 0;
@@ -1165,90 +1199,6 @@ a:hover {
 
 @media (max-width: 520px) {
   .ts-drone-features {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Clientes */
-.section-clientes--light {
-  background: #ffffff;
-  padding-top: 3.5rem;
-  padding-bottom: 3.5rem;
-}
-
-.section-clientes--light .split-pre {
-  color: var(--blue-accent);
-}
-
-.section-clientes--light .split-main {
-  color: #0f172a;
-}
-
-.container--clients {
-  max-width: 1000px;
-}
-
-.ts-clients-head {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.ts-clients-hint {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #64748b;
-  margin: 0 auto 2.25rem;
-  max-width: 36rem;
-}
-
-.ts-clients-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2.5rem 2rem;
-  align-items: center;
-  justify-items: center;
-}
-
-.ts-client-slot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 5.5rem;
-  padding: 1rem 0.75rem;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-.ts-client-slot img {
-  display: block;
-  max-width: 100%;
-  max-height: 4.5rem;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-}
-
-/* Logos que se ven pequeños: un poco más de altura máxima */
-.ts-client-slot--logo-lg {
-  min-height: 6.5rem;
-}
-
-.ts-client-slot--logo-lg img {
-  max-height: 6rem;
-}
-
-@media (max-width: 900px) {
-  .ts-clients-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .ts-clients-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -2066,8 +2016,8 @@ a:hover {
 
 .whatsapp-float {
   position: fixed;
-  right: 1rem;
-  bottom: 1rem;
+  right: max(1rem, env(safe-area-inset-right, 0px));
+  bottom: max(1rem, env(safe-area-inset-bottom, 0px));
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -2129,7 +2079,7 @@ a:hover {
   background-color: var(--surface-1);
   background-image: linear-gradient(165deg, rgba(11, 24, 50, 0.96) 0%, rgba(16, 32, 65, 0.94) 100%);
   color: rgba(255, 255, 255, 0.75);
-  padding: 2.2rem 0 1.4rem;
+  padding: 2.2rem 0 max(1.4rem, env(safe-area-inset-bottom, 0px));
   font-size: 0.85rem;
 }
 
@@ -2212,7 +2162,7 @@ a:hover {
 
   .nav-main {
     position: fixed;
-    inset: 58px 0 0 0;
+    inset: calc(58px + env(safe-area-inset-top, 0px)) 0 0 0;
     z-index: 110;
     background: rgba(6, 13, 24, 0.98);
     backdrop-filter: blur(8px);
@@ -2220,7 +2170,10 @@ a:hover {
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
     gap: 0.45rem;
     border-top: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -2260,7 +2213,7 @@ a:hover {
   }
 
   .menu-toggle {
-    display: block;
+    display: inline-flex;
   }
 
   .header-social {
@@ -2268,8 +2221,8 @@ a:hover {
   }
 
   .whatsapp-float {
-    right: 0.9rem;
-    bottom: 0.9rem;
+    right: max(0.9rem, env(safe-area-inset-right, 0px));
+    bottom: max(0.9rem, env(safe-area-inset-bottom, 0px));
     width: 56px;
     height: 56px;
   }
@@ -2282,15 +2235,19 @@ a:hover {
 
 @media (max-width: 600px) {
   .container {
-    width: min(1120px, 94vw);
+    padding-inline: max(0.85rem, env(safe-area-inset-left)) max(0.85rem, env(safe-area-inset-right));
+  }
+
+  .hero {
+    min-height: min(78vh, 620px);
   }
 
   .hero-inner {
-    padding: 2.6rem 0 3.4rem;
+    padding: 2.25rem 0 3rem;
   }
 
   .section {
-    padding: 3rem 0;
+    padding: 2.75rem 0;
   }
 
   .hero-title-display {
@@ -2302,8 +2259,83 @@ a:hover {
     line-height: 1.55;
   }
 
+  .btn-primary,
+  .somos-cta {
+    width: 100%;
+    max-width: 22rem;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .services-otros-band {
+    padding: 2.75rem 0 3rem;
+  }
+
+  .services-otros-head {
+    margin-bottom: 2rem;
+  }
+
+  .services-otros-card {
+    min-height: 280px;
+  }
+
+  .ts-filosofia {
+    padding: 2.75rem 0;
+  }
+
+  .ts-filosofia-quote {
+    font-size: clamp(1.2rem, 5.5vw, 1.65rem);
+  }
+
+  .footer-cta {
+    padding: 2.5rem 0 2rem;
+  }
+
+  .contact-field input,
+  .contact-field textarea,
+  .contact-field select {
+    font-size: 16px;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .contact-consent {
+    font-size: 0.82rem;
+    gap: 0.75rem;
+  }
+
+  .contact-consent input {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    min-height: 22px;
+    margin-top: 0.1rem;
+  }
+
   .footer-contact p {
     font-size: 0.95rem;
+  }
+
+  .footer-legal {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.55;
+  }
+
+  .footer-contact a {
+    overflow-wrap: anywhere;
+  }
+
+  .ts-loc-panel,
+  .ts-loc-map-card {
+    padding: 1.25rem;
+  }
+
+  .ts-drone-showcase__media img {
+    min-height: min(42vh, 300px);
+  }
+
+  .ts-drone-showcase .ts-drone-title {
+    font-size: clamp(1.15rem, 4.5vw, 1.45rem);
   }
 }
 
